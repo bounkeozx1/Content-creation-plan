@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐥 น้องก้าบ — ตารางคอนเทนต์ 30 วัน</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0E17;
+    --card: #111827;
+    --card2: #161D2E;
+    --border: #1F2A3C;
+    --border2: #263348;
+    --yellow: #FFD60A;
+    --sky: #38BDF8;
+    --orange: #FB923C;
+    --green: #34D399;
+    --red: #F87171;
+    --purple: #A78BFA;
+    --pink: #F472B6;
+    --text: #E2EAF4;
+    --muted: #64748B;
+    --muted2: #94A3B8;
+    --w1: #FFD60A;
+    --w2: #38BDF8;
+    --w3: #FB923C;
+    --w4: #34D399;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sarabun', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: linear-gradient(180deg, #0D1520 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 36px 40px 0;
+  }
+
+  .header-top {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .brand-duck {
+    font-size: 52px;
+    animation: duck-bob 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 24px rgba(255,214,10,0.5));
+  }
+
+  @keyframes duck-bob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
+  }
+
+  .brand-info h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--yellow);
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .brand-info p {
+    color: var(--muted2);
+    font-size: 13px;
+    margin-top: 5px;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .stat-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    text-align: center;
+    min-width: 90px;
+  }
+
+  .stat-num {
+    font-family: 'Kanit', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== WEEK TABS ===== */
+  .week-tabs {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .week-tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    padding: 14px 28px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-btn.active { color: var(--text); }
+  .tab-w1.active { border-bottom-color: var(--w1); color: var(--w1); }
+  .tab-w2.active { border-bottom-color: var(--w2); color: var(--w2); }
+  .tab-w3.active { border-bottom-color: var(--w3); color: var(--w3); }
+  .tab-w4.active { border-bottom-color: var(--w4); color: var(--w4); }
+  .tab-all.active { border-bottom-color: var(--purple); color: var(--purple); }
+
+  /* ===== MAIN ===== */
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 40px 60px;
+  }
+
+  /* ===== WEEK SECTION ===== */
+  .week-section {
+    display: none;
+  }
+
+  .week-section.visible { display: block; }
+
+  .week-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    border-left: 4px solid;
+  }
+
+  .wh-w1 { border-left-color: var(--w1); }
+  .wh-w2 { border-left-color: var(--w2); }
+  .wh-w3 { border-left-color: var(--w3); }
+  .wh-w4 { border-left-color: var(--w4); }
+
+  .wh-icon { font-size: 28px; }
+
+  .wh-info h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .wh-info p {
+    font-size: 13px;
+    color: var(--muted2);
+    margin-top: 2px;
+  }
+
+  .wh-count {
+    margin-left: auto;
+    font-family: 'Kanit', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--card2);
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  /* ===== DAY GRID ===== */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  /* ===== DAY CARD ===== */
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .day-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border2);
+  }
+
+  .day-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .day-num {
+    font-family: 'Kanit', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.15;
+  }
+
+  .day-date-info { flex: 1; }
+
+  .day-date {
+    font-family: 'Kanit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .day-clips-count {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--card2);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: 'Kanit', sans-serif;
+  }
+
+  /* Long video */
+  .video-long {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(255,214,10,0.03) 0%, transparent 100%);
+  }
+
+  .v-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .badge-long { background: rgba(255,214,10,0.12); color: var(--yellow); border: 1px solid rgba(255,214,10,0.2); }
+  .badge-shorts { background: rgba(56,189,248,0.1); color: var(--sky); border: 1px solid rgba(56,189,248,0.2); }
+
+  .v-title {
+    font-family: 'Kanit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .v-hook {
+    font-size: 12px;
+    color: var(--muted2);
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+
+  /* Shorts */
+  .shorts-list {
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .short-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .short-slot {
+    font-size: 10px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    background: var(--card2);
+    padding: 3px 7px;
+    border-radius: 5px;
+    white-space: nowrap;
+    margin-top: 1px;
+    flex-shrink: 0;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .slot-am { color: var(--yellow); background: rgba(255,214,10,0.08); }
+  .slot-noon { color: var(--sky); background: rgba(56,189,248,0.08); }
+  .slot-pm { color: var(--orange); background: rgba(251,146,60,0.08); }
+
+  .short-title {
+    font-size: 13px;
+    color: var(--muted2);
+    line-height: 1.4;
+  }
+
+  /* ALL VIEW */
+  #section-all .all-weeks {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .site-header { padding: 24px 20px 0; }
+    main { padding: 24px 20px 40px; }
+    .days-grid { grid-template-columns: 1fr; }
+    .stats-row { gap: 8px; }
+    .stat-pill { padding: 10px 14px; min-width: 70px; }
+  }
+
+  /* Color per week */
+  .w1 .day-num { color: var(--w1); }
+  .w2 .day-num { color: var(--w2); }
+  .w3 .day-num { color: var(--w3); }
+  .w4 .day-num { color: var(--w4); }
+
+  /* Progress dots */
+  .week-progress {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .wpd {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border2);
+  }
+  .wpd.filled { background: var(--yellow); }
+
+  /* Print / export hint */
+  .export-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--muted2);
+    margin-bottom: 24px;
+  }
+
+  .legend-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted2);
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="header-top">
+    <div class="brand">
+      <div class="brand-duck">🐥</div>
+      <div class="brand-info">
+        <h1>น้องก้าบ — ตารางคอนเทนต์ 30 วัน</h1>
+        <p>Duck Studio · AI Animation Channel · เดือนแรกเริ่มต้น</p>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill">
+        <div class="stat-num" style="color:var(--yellow)">30</div>
+        <div class="stat-label">Long Videos</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" style="color:var(--sky)">90</div>
+        <div class="stat-label">Shorts</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" style="color:var(--green)">120</div>
+        <div class="stat-label">Total Clips</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" style="color:var(--purple)">4</div>
+        <div class="stat-label">Clips/Day</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" style="color:var(--orange)">4</div>
+        <div class="stat-label">Weeks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="week-tabs" id="weekTabs">
+    <button class="tab-btn tab-all active" onclick="switchTab('all', this)">📋 ทั้งหมด</button>
+    <button class="tab-btn tab-w1" onclick="switchTab('w1', this)">🌅 Week 1 — ชีวิตประจำวัน</button>
+    <button class="tab-btn tab-w2" onclick="switchTab('w2', this)">🏫 Week 2 — โรงเรียนอนุบาล</button>
+    <button class="tab-btn tab-w3" onclick="switchTab('w3', this)">💛 Week 3 — อารมณ์และนิสัย</button>
+    <button class="tab-btn tab-w4" onclick="switchTab('w4', this)">🌈 Week 4 — ผจญภัยเล็กๆ</button>
+  </div>
+</div>
+
+<main>
+
+  <div class="legend-row">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Long Video — ตอนหลัก (เช้า)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);opacity:0.6"></div> Shorts AM — เช้า</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--sky)"></div> Shorts NOON — เที่ยง</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Shorts PM — เย็น</div>
+  </div>
+
+  <!-- ALL -->
+  <div id="section-all" class="week-section visible">
+    <div class="all-weeks" id="allWeeksContainer"></div>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div id="section-w1" class="week-section">
+    <div class="week-heading wh-w1">
+      <span class="wh-icon">🌅</span>
+      <div class="wh-info">
+        <h2 style="color:var(--w1)">Week 1 — ชีวิตประจำวัน</h2>
+        <p>ตื่นนอน แปรงฟัน แต่งตัว กินข้าว เข้านอน — สร้างรูทีนให้เด็กจำ</p>
+      </div>
+      <div class="wh-count">Day 1–7 · 28 คลิป</div>
+    </div>
+    <div class="days-grid" id="grid-w1"></div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div id="section-w2" class="week-section">
+    <div class="week-heading wh-w2">
+      <span class="wh-icon">🏫</span>
+      <div class="wh-info">
+        <h2 style="color:var(--w2)">Week 2 — โรงเรียนอนุบาล</h2>
+        <p>เพื่อนใหม่ เรียนสี นับเลข รูปทรง เต้น — สร้างโลกโรงเรียน</p>
+      </div>
+      <div class="wh-count">Day 8–14 · 28 คลิป</div>
+    </div>
+    <div class="days-grid" id="grid-w2"></div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div id="section-w3" class="week-section">
+    <div class="week-heading wh-w3">
+      <span class="wh-icon">💛</span>
+      <div class="wh-info">
+        <h2 style="color:var(--w3)">Week 3 — อารมณ์และนิสัย</h2>
+        <p>เสียใจ กลัว โกรธ ดีใจ แบ่งปัน ขอโทษ — สอน EQ เด็กเล็ก</p>
+      </div>
+      <div class="wh-count">Day 15–21 · 28 คลิป</div>
+    </div>
+    <div class="days-grid" id="grid-w3"></div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div id="section-w4" class="week-section">
+    <div class="week-heading wh-w4">
+      <span class="wh-icon">🌈</span>
+      <div class="wh-info">
+        <h2 style="color:var(--w4)">Week 4 — ผจญภัยเล็กๆ</h2>
+        <p>ฝนตก สวนสัตว์ ตลาด ทำอาหาร ป่วย วันเกิด — ครบรอบเดือนแรก</p>
+      </div>
+      <div class="wh-count">Day 22–30 · 36 คลิป</div>
+    </div>
+    <div class="days-grid" id="grid-w4"></div>
+  </div>
+
+</main>
+
+<script>
+const allDays = [
+  // ===== WEEK 1 =====
+  {
+    day: 1, week: 'w1',
+    long: {
+      title: "น้องก้าบตื่นนอนครั้งแรก",
+      hook: "ก้าบนอนหลับอยู่ แล้วพระอาทิตย์ส่องมาทางหน้าต่าง จะตื่นได้ไหมนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "เพลงตื่นเช้า ก้าบๆ" },
+      { slot: "NOON", title: "ก้าบๆ อย่านอนต่อนะ!" },
+      { slot: "PM",   title: "หนูลุกเองได้แล้ว 🎉" },
+    ]
+  },
+  {
+    day: 2, week: 'w1',
+    long: {
+      title: "น้องก้าบไม่อยากแปรงฟัน",
+      hook: "ทำไมต้องแปรงฟันด้วย? น้องก้าบงอแงและหนีไปซ่อนใต้ผ้าห่ม",
+    },
+    shorts: [
+      { slot: "AM",   title: "เพลงแปรงฟันสนุกสนาน" },
+      { slot: "NOON", title: "ฟองฟู่ๆ แปรงฟันกันเถอะ" },
+      { slot: "PM",   title: "ฟันขาวสวยแล้ว! ยิ้มได้เลย" },
+    ]
+  },
+  {
+    day: 3, week: 'w1',
+    long: {
+      title: "น้องก้าบแต่งตัวเองไม่เป็น",
+      hook: "เสื้อกลับหน้าหลัง รองเท้าใส่ผิดข้าง ก้าบสับสนมากเลย!",
+    },
+    shorts: [
+      { slot: "AM",   title: "ใส่เสื้อยังไงนะ? 😅" },
+      { slot: "NOON", title: "ติดกระดุมได้แล้ว!" },
+      { slot: "PM",   title: "น้องก้าบสวยมากวันนี้!" },
+    ]
+  },
+  {
+    day: 4, week: 'w1',
+    long: {
+      title: "น้องก้าบไม่กินผัก",
+      hook: "แม่ทำผัดผักมาให้ แต่ก้าบผลักถาดออกแล้วบอกว่าไม่อร่อย",
+    },
+    shorts: [
+      { slot: "AM",   title: "ผักหลายสีน่ากินมาก" },
+      { slot: "NOON", title: "เพลงกินข้าวให้อร่อย" },
+      { slot: "PM",   title: "กินผักแล้วแข็งแรงนะ!" },
+    ]
+  },
+  {
+    day: 5, week: 'w1',
+    long: {
+      title: "น้องก้าบผูกเชือกรองเท้าไม่ได้",
+      hook: "วันนี้อยากใส่รองเท้าคนเดียว แต่เชือกยาวมากๆ ทำยังไงดีนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "รองเท้าข้างไหนก่อนนะ?" },
+      { slot: "NOON", title: "ผูกเชือกได้แล้ว! เก่งมาก" },
+      { slot: "PM",   title: "วิ่งได้เร็วมากเลยวันนี้" },
+    ]
+  },
+  {
+    day: 6, week: 'w1',
+    long: {
+      title: "น้องก้าบล้างมือก่อนกินข้าว",
+      hook: "มือก้าบเปื้อนดินจากสวน แม่บอกต้องล้างก่อน แต่ก้าบหิวมากแล้ว!",
+    },
+    shorts: [
+      { slot: "AM",   title: "ล้างมือให้สะอาดนะ" },
+      { slot: "NOON", title: "ฟองสบู่เยอะจังเลย!" },
+      { slot: "PM",   title: "มือสะอาดแล้ว กินข้าวได้!" },
+    ]
+  },
+  {
+    day: 7, week: 'w1',
+    long: {
+      title: "น้องก้าบไม่อยากเข้านอน",
+      hook: "ยังอยากเล่นอยู่เลย แต่แม่บอกว่าดึกแล้ว น้องก้าบจะยอมนอนไหมนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "ง่วงนอนแล้วนะน้องก้าบ" },
+      { slot: "NOON", title: "เพลงกล่อมนอนหวานๆ 🎵" },
+      { slot: "PM",   title: "ฝันดีนะน้องก้าบ 🌙" },
+    ]
+  },
+
+  // ===== WEEK 2 =====
+  {
+    day: 8, week: 'w2',
+    long: {
+      title: "น้องก้าบไปโรงเรียนวันแรก",
+      hook: "วันแรกของโรงเรียนอนุบาล ก้าบกลัวมากเลย แต่แม่บอกว่าสนุกแน่นอน!",
+    },
+    shorts: [
+      { slot: "AM",   title: "กลัวไปโรงเรียนนะก้าบ 😟" },
+      { slot: "NOON", title: "เจอเพื่อนใหม่แล้ว!" },
+      { slot: "PM",   title: "โรงเรียนสนุกมากเลย 🏫" },
+    ]
+  },
+  {
+    day: 9, week: 'w2',
+    long: {
+      title: "น้องก้าบเจอเพื่อนใหม่ชื่อหมี",
+      hook: "มีเพื่อนใหม่ตัวกลมๆ น่ารักชื่อหมี แต่ก้าบไม่รู้จะเริ่มคุยยังไง",
+    },
+    shorts: [
+      { slot: "AM",   title: "สวัสดีเพื่อนใหม่นะ 👋" },
+      { slot: "NOON", title: "เล่นด้วยกันได้ไหม?" },
+      { slot: "PM",   title: "เพื่อนกันตลอดไปนะ 🤝" },
+    ]
+  },
+  {
+    day: 10, week: 'w2',
+    long: {
+      title: "น้องก้าบเรียนสีกับครู",
+      hook: "ครูถามว่าสีเหลืองคืออะไร ก้าบตอบว่าเหมือนตัวเอง! แล้วสีอื่นล่ะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "สีแดงคืออะไรนะ? 🔴" },
+      { slot: "NOON", title: "สีเหลืองเหมือนก้าบเลย!" },
+      { slot: "PM",   title: "ระบายสีสนุกมากๆ 🎨" },
+    ]
+  },
+  {
+    day: 11, week: 'w2',
+    long: {
+      title: "น้องก้าบเรียนนับเลข 1 ถึง 5",
+      hook: "ก้าบนับนิ้วมือได้แค่ 3 ครูบอกว่ายังมี 4 กับ 5 อีกนะ!",
+    },
+    shorts: [
+      { slot: "AM",   title: "1 2 3 นับตามก้าบเลย!" },
+      { slot: "NOON", title: "นับนิ้วด้วยกัน 4 5!" },
+      { slot: "PM",   title: "เพลงนับเลข 1-5 ติดหู 🎵" },
+    ]
+  },
+  {
+    day: 12, week: 'w2',
+    long: {
+      title: "น้องก้าบเรียนรูปทรงกับเพื่อน",
+      hook: "กล่องนมเป็นรูปอะไร? ลูกบอลเป็นรูปอะไร? ก้าบงงมากเลย!",
+    },
+    shorts: [
+      { slot: "AM",   title: "วงกลมกลมๆ น่ารักจัง ⚪" },
+      { slot: "NOON", title: "สี่เหลี่ยมมีมุม 4 มุมนะ" },
+      { slot: "PM",   title: "รูปทรงรอบตัวเรามีเยอะ!" },
+    ]
+  },
+  {
+    day: 13, week: 'w2',
+    long: {
+      title: "น้องก้าบเต้นในชั้นเรียน",
+      hook: "ครูเปิดเพลงแล้วให้ทุกคนเต้น ก้าบเต้นแบบก้าบๆ แปลกกว่าใคร!",
+    },
+    shorts: [
+      { slot: "AM",   title: "เต้นก้าบๆ สนุกจัง 🕺" },
+      { slot: "NOON", title: "จังหวะก้าบๆ ตามมาเลย!" },
+      { slot: "PM",   title: "ทุกคนเต้นพร้อมกัน! 🎉" },
+    ]
+  },
+  {
+    day: 14, week: 'w2',
+    long: {
+      title: "น้องก้าบลืมกระเป๋าที่บ้าน",
+      hook: "มาถึงโรงเรียนแล้วถึงรู้ว่าลืมกระเป๋า ดินสอสีอยู่ในนั้นด้วย!",
+    },
+    shorts: [
+      { slot: "AM",   title: "อ้าว กระเป๋าหายไปไหน? 😱" },
+      { slot: "NOON", title: "วิ่งกลับบ้านด่วนเลย!" },
+      { slot: "PM",   title: "เอาได้แล้ว ไปทันแล้ว! 😅" },
+    ]
+  },
+
+  // ===== WEEK 3 =====
+  {
+    day: 15, week: 'w3',
+    long: {
+      title: "น้องก้าบร้องไห้เพราะของเล่นพัง",
+      hook: "รถของเล่นคันโปรดพังแล้ว ก้าบร้องไห้ไม่หยุด จะซ่อมได้ไหมนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "ของเล่นพังแล้วเสียใจมาก 😢" },
+      { slot: "NOON", title: "อย่าร้องไห้นะน้องก้าบ" },
+      { slot: "PM",   title: "แม่ซ่อมให้ได้แล้ว! 🎊" },
+    ]
+  },
+  {
+    day: 16, week: 'w3',
+    long: {
+      title: "น้องก้าบกลัวฟ้าร้องฟ้าผ่า",
+      hook: "ฝนตกหนักและมีฟ้าร้องดังมาก ก้าบซ่อนตัวอยู่ใต้โซฟาเลย!",
+    },
+    shorts: [
+      { slot: "AM",   title: "ฟ้าร้องน่ากลัวมากเลย! ⚡" },
+      { slot: "NOON", title: "อยู่ในบ้านปลอดภัยนะ 🏠" },
+      { slot: "PM",   title: "ฝนหยุดแล้ว ไม่กลัวแล้ว! 🌈" },
+    ]
+  },
+  {
+    day: 17, week: 'w3',
+    long: {
+      title: "น้องก้าบโกรธเพราะเพื่อนแย่งของเล่น",
+      hook: "หมีเพื่อนแย่งรถไฟไปเล่น ก้าบโกรธมาก จะทะเลาะกันไหมนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "อย่าแย่งของกันนะ! 😠" },
+      { slot: "NOON", title: "แบ่งกันเล่นได้นะเพื่อน" },
+      { slot: "PM",   title: "โกรธกันแล้วคืนดีกัน 😊" },
+    ]
+  },
+  {
+    day: 18, week: 'w3',
+    long: {
+      title: "น้องก้าบทำของขวัญให้แม่วันเกิด",
+      hook: "วันนี้วันเกิดแม่! ก้าบอยากทำของขวัญให้แม่เอง ทำอะไรดีนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "วันเกิดแม่วันนี้เลย! 🎂" },
+      { slot: "NOON", title: "ทำการ์ดให้แม่เองเลย 🎨" },
+      { slot: "PM",   title: "รักแม่มากที่สุดในโลก 💛" },
+    ]
+  },
+  {
+    day: 19, week: 'w3',
+    long: {
+      title: "น้องก้าบแบ่งขนมให้เพื่อน",
+      hook: "ก้าบมีขนมอร่อยมาก แต่มีแค่คนเดียว เพื่อนหลายคนมองอยู่เลย",
+    },
+    shorts: [
+      { slot: "AM",   title: "ขนมอร่อยมากเลย! 🍬" },
+      { slot: "NOON", title: "แบ่งให้เพื่อนด้วยนะ" },
+      { slot: "PM",   title: "เพื่อนดีใจมากๆ เลย 😄" },
+    ]
+  },
+  {
+    day: 20, week: 'w3',
+    long: {
+      title: "น้องก้าบขอโทษที่ทำแก้วแตก",
+      hook: "ก้าบวิ่งแล้วชนโต๊ะ แก้วน้ำแม่ตกแตก กลัวแม่จะโกรธมากๆ เลย",
+    },
+    shorts: [
+      { slot: "AM",   title: "อ๊ะ แก้วตกแตกแล้ว! 😨" },
+      { slot: "NOON", title: "ต้องขอโทษแม่นะก้าบ" },
+      { slot: "PM",   title: "แม่อภัยให้แล้ว รักกัน 💛" },
+    ]
+  },
+  {
+    day: 21, week: 'w3',
+    long: {
+      title: "น้องก้าบช่วยเก็บของเล่น",
+      hook: "ของเล่นกระจายทั่วบ้านเลย แม่บอกให้เก็บ ก้าบจะทำได้ไหมนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "ของเล่นเกลื่อนบ้านเลย! 😅" },
+      { slot: "NOON", title: "ช่วยกันเก็บนะเพื่อนๆ" },
+      { slot: "PM",   title: "ห้องสะอาดแล้ว เก่งมาก! ✨" },
+    ]
+  },
+
+  // ===== WEEK 4 =====
+  {
+    day: 22, week: 'w4',
+    long: {
+      title: "น้องก้าบตากฝนแล้วเปียกทั้งตัว",
+      hook: "ก้าบลืมร่มแล้วฝนตกหนักมาก เปียกจนขนทั้งตัวแฉะไปหมด!",
+    },
+    shorts: [
+      { slot: "AM",   title: "ฝนตกหนักมากเลย! ☔" },
+      { slot: "NOON", title: "ร่มสีเหลืองของก้าบน่ารัก" },
+      { slot: "PM",   title: "ลุยน้ำฝนสนุกมากๆ! 💦" },
+    ]
+  },
+  {
+    day: 23, week: 'w4',
+    long: {
+      title: "น้องก้าบไปสวนสัตว์ครั้งแรก",
+      hook: "ไปสวนสัตว์ครั้งแรก เจอสัตว์ใหญ่มากมาย ก้าบตื่นเต้นและกลัวพร้อมกัน!",
+    },
+    shorts: [
+      { slot: "AM",   title: "สิงโตน่ากลัวมากเลย! 🦁" },
+      { slot: "NOON", title: "ลิงน่ารักจัง เล่นเก่งด้วย 🐒" },
+      { slot: "PM",   title: "ช้างตัวใหญ่มากๆ เลย! 🐘" },
+    ]
+  },
+  {
+    day: 24, week: 'w4',
+    long: {
+      title: "น้องก้าบเล่นสนามเด็กเล่น",
+      hook: "สนามเด็กเล่นมีทุกอย่าง! ชิงช้า สไลเดอร์ กระดานหก ก้าบจะเล่นอะไรก่อน?",
+    },
+    shorts: [
+      { slot: "AM",   title: "ชิงช้าสูงมากเลย! 🎡" },
+      { slot: "NOON", title: "สไลเดอร์ลงมาเร็วมาก!" },
+      { slot: "PM",   title: "เล่นทรายกันเถอะ 🏖️" },
+    ]
+  },
+  {
+    day: 25, week: 'w4',
+    long: {
+      title: "น้องก้าบปลูกต้นไม้กับคุณปู่",
+      hook: "คุณปู่ชวนก้าบปลูกต้นไม้ในสวน ก้าบไม่เคยทำเลย จะทำได้ไหมนะ?",
+    },
+    shorts: [
+      { slot: "AM",   title: "ดินดำๆ นุ่มมือจังเลย 🌱" },
+      { slot: "NOON", title: "รดน้ำต้นไม้ทุกวันนะ 💧" },
+      { slot: "PM",   title: "ดอกไม้บานสวยมาก! 🌸" },
+    ]
+  },
+  {
+    day: 26, week: 'w4',
+    long: {
+      title: "น้องก้าบทำคุกกี้กับแม่",
+      hook: "แม่ชวนก้าบทำคุกกี้ด้วยกัน ก้าบตักแป้งแล้วหกใส่หน้าตัวเอง!",
+    },
+    shorts: [
+      { slot: "AM",   title: "ผสมแป้งด้วยกันนะ 🍪" },
+      { slot: "NOON", title: "อบในเตาอบแล้ว! 🔥" },
+      { slot: "PM",   title: "คุกกี้อร่อยมากๆ เลย 😋" },
+    ]
+  },
+  {
+    day: 27, week: 'w4',
+    long: {
+      title: "น้องก้าบไปตลาดกับยาย",
+      hook: "ยายพาก้าบไปตลาดซื้อของ เยอะมากเลย ก้าบไม่รู้จะถือยังไง!",
+    },
+    shorts: [
+      { slot: "AM",   title: "ผักสีสวยในตลาด 🥦🥕" },
+      { slot: "NOON", title: "ปลาตัวใหญ่ผิดปกติเลย! 🐟" },
+      { slot: "PM",   title: "ซื้อของครบแล้ว กลับบ้าน!" },
+    ]
+  },
+  {
+    day: 28, week: 'w4',
+    long: {
+      title: "น้องก้าบป่วยเป็นไข้",
+      hook: "ก้าบจามตลอดเลย หัวร้อน น้ำมูกไหล ต้องนอนพักและกินยาแล้ว",
+    },
+    shorts: [
+      { slot: "AM",   title: "จาม บ๊ะ! หนูป่วยแล้ว 🤧" },
+      { slot: "NOON", title: "กินยาขมมากเลย 😖" },
+      { slot: "PM",   title: "หายแล้ว! ดีใจมากๆ 💊" },
+    ]
+  },
+  {
+    day: 29, week: 'w4',
+    long: {
+      title: "น้องก้าบฉลองวันเกิดครบรอบ",
+      hook: "วันเกิดก้าบแล้ว! เพื่อนๆ ทุกคนมางานปาร์ตี้ มีเค้กชั้นใหญ่มากด้วย!",
+    },
+    shorts: [
+      { slot: "AM",   title: "วันเกิดก้าบแล้ว! 🎂" },
+      { slot: "NOON", title: "เป่าเทียนกัน 1 2 3! 🕯️" },
+      { slot: "PM",   title: "ของขวัญเยอะมากเลย! 🎁" },
+    ]
+  },
+  {
+    day: 30, week: 'w4',
+    long: {
+      title: "น้องก้าบสรุปหนึ่งเดือนที่ผ่านมา",
+      hook: "หนึ่งเดือนผ่านไปแล้ว ก้าบได้เรียนรู้อะไรบ้าง? ขอบคุณทุกคนที่ดูด้วยนะ!",
+    },
+    shorts: [
+      { slot: "AM",   title: "เดือนนี้สนุกมากๆ เลย! 🌟" },
+      { slot: "NOON", title: "ขอบคุณเพื่อนๆ ทุกคน 💛" },
+      { slot: "PM",   title: "พบกันเดือนหน้านะ! 🐥👋" },
+    ]
+  },
+];
+
+const weekColors = {
+  w1: 'var(--w1)', w2: 'var(--w2)', w3: 'var(--w3)', w4: 'var(--w4)'
+};
+
+const weekNames = {
+  w1: 'Week 1 — ชีวิตประจำวัน',
+  w2: 'Week 2 — โรงเรียนอนุบาล',
+  w3: 'Week 3 — อารมณ์และนิสัย',
+  w4: 'Week 4 — ผจญภัยเล็กๆ',
+};
+
+const weekIcons = {
+  w1: '🌅', w2: '🏫', w3: '💛', w4: '🌈'
+};
+
+const weekHeadingClass = {
+  w1: 'wh-w1', w2: 'wh-w2', w3: 'wh-w3', w4: 'wh-w4'
+};
+
+function buildCard(d) {
+  const color = weekColors[d.week];
+  const slotClass = { AM: 'slot-am', NOON: 'slot-noon', PM: 'slot-pm' };
+
+  return `
+    <div class="day-card ${d.week}">
+      <div class="day-header">
+        <div class="day-num">${String(d.day).padStart(2,'0')}</div>
+        <div class="day-date-info">
+          <div class="day-date">วันที่ ${d.day} · ${weekNames[d.week].split('—')[0].trim()}</div>
+        </div>
+        <div class="day-clips-count">4 คลิป</div>
+      </div>
+
+      <div class="video-long">
+        <span class="v-type-badge badge-long">🎬 LONG · เช้า</span>
+        <div class="v-title">${d.long.title}</div>
+        <div class="v-hook">${d.long.hook}</div>
+      </div>
+
+      <div class="shorts-list">
+        ${d.shorts.map(s => `
+          <div class="short-item">
+            <span class="short-slot ${slotClass[s.slot]}">${s.slot}</span>
+            <span class="short-title">⚡ ${s.title}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// Build each week grid
+['w1','w2','w3','w4'].forEach(w => {
+  const grid = document.getElementById(`grid-${w}`);
+  if (grid) {
+    grid.innerHTML = allDays.filter(d => d.week === w).map(buildCard).join('');
+  }
+});
+
+// Build ALL view
+const container = document.getElementById('allWeeksContainer');
+['w1','w2','w3','w4'].forEach(w => {
+  const days = allDays.filter(d => d.week === w);
+  const dayRange = w === 'w4' ? 'Day 22–30' : w === 'w1' ? 'Day 1–7' : w === 'w2' ? 'Day 8–14' : 'Day 15–21';
+  const clipCount = days.length * 4;
+  container.innerHTML += `
+    <div>
+      <div class="week-heading ${weekHeadingClass[w]}">
+        <span class="wh-icon">${weekIcons[w]}</span>
+        <div class="wh-info">
+          <h2 style="color:${weekColors[w]}">${weekNames[w]}</h2>
+        </div>
+        <div class="wh-count">${dayRange} · ${clipCount} คลิป</div>
+      </div>
+      <div class="days-grid">${days.map(buildCard).join('')}</div>
+    </div>
+  `;
+});
+
+// Tabs
+function switchTab(id, btn) {
+  document.querySelectorAll('.week-section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`section-${id}`).classList.add('visible');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
